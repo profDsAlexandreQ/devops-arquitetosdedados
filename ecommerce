@@ -3,17 +3,17 @@ USE ecommerce_tech;
 
 CREATE TABLE produtos (
   id_produto INTEGER PRIMARY KEY,
-  nome_produto VARCHAR (50),
+  nome_produto VARCHAR(50),
   preco INT,
   estoque INT
 );
 
 CREATE TABLE clientes (
   id_cliente INTEGER PRIMARY KEY,
-  nome_produto VARCHAR (50),
-  email VARCHAR (100),
+  nome_cliente VARCHAR(50),
+  email VARCHAR(100),
   data_ultima_compra INT,
-  status VARCHAR (10)
+  status VARCHAR(10)
 );
 
 CREATE TABLE vendas (
@@ -29,31 +29,25 @@ CREATE TABLE vendas_auditoria_2026 (
   id_cliente INT
 );
 
-INSERT INTO Vendas_auditoria_2026 (id_venda, id_cliente)
+INSERT INTO produtos (id_produto, nome_produto, preco, estoque)
+VALUES
+(1, 'Notebook', 3500, 10),
+(2, 'Mouse Gamer', 150, 20),
+(3, 'Teclado Mecanico', 300, 15);
+
+INSERT INTO clientes (id_cliente, nome_cliente, email, data_ultima_compra, status)
+VALUES
+(1, 'Joao Silva', 'joao@gmail.com', 20260501, 'Ativo'),
+(2, 'Maria Souza', 'maria@gmail.com', 20260515, 'Ativo'),
+(3, 'Pedro Lima', 'pedro@gmail.com', 20260420, 'Inativo');
+
+INSERT INTO vendas (id_venda, id_cliente, id_produto, data_venda)
+VALUES
+(1, 1, 2, 20260110),
+(2, 2, 1, 20260325),
+(3, 3, 3, 20251205);
+
+INSERT INTO vendas_auditoria_2026 (id_venda, id_cliente)
 SELECT v.id_venda, v.id_cliente
-FROM Vendas v
-WHERE STRFTIME (v.data_venda) = 2026
-
--- 1. Inserir dados na tabela de produtos
-INSERT INTO produtos (id_produto, nome_produto, preco, estoque) VALUES 
-(1, 'Smartphone Galaxy S24', 4500, 15),
-(2, 'Notebook Dell Inspiron', 3800, 8),
-(3, 'Fone de Ouvido Bluetooth', 250, 50),
-(4, 'Monitor Gamer 24"', 1200, 12),
-(5, 'Teclado Mecânico RGB', 350, 20);
-
--- 2. Inserir dados na tabela de clientes
-INSERT INTO clientes (id_cliente, nome_produto, email, data_ultima_compra, status) VALUES 
-(101, 'Ana Silva', 'ana.silva@email.com', 20251210, 'Ativo'),
-(102, 'Bruno Souza', 'bruno.souza@email.com', 20260115, 'Ativo'),
-(103, 'Carlos Lima', 'carlos.lima@email.com', 20240822, 'Inativo'),
-(104, 'Diana Prado', 'diana.prado@email.com', 20260220, 'Ativo'),
-(105, 'Eduardo Costa', 'eduardo.costa@email.com', 20250505, 'Ativo');
-
--- 3. Inserir dados na tabela de vendas
--- As datas estão em formato Unix Timestamp para permitir a extração do ano via STRFTIME
-INSERT INTO vendas (id_venda, id_cliente, id_produto, data_venda) VALUES 
-(1001, 101, 3, 1735689600), -- Ano 2025 (01/01/2025)
-(1002, 102, 1, 1768435200), -- Ano 2026 (15/01/2026) -> Será auditada
-(1003, 104, 4, 1771545600), -- Ano 2026 (20/02/2026) -> Será auditada
-(1005, 103, 2, 1715340000); -- Ano 2026 (10/05/2024)
+FROM vendas v
+WHERE YEAR(v.data_venda) = 2026;
