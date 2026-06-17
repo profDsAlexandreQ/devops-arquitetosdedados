@@ -40,8 +40,8 @@ INSERT INTO produtos (id_produto, nome_produto, preco, estoque) VALUES
 (2, 'Notebook Dell Inspiron', 3800, 8),
 (3, 'Fone de Ouvido Bluetooth', 250, 50),
 (4, 'Monitor Gamer 24"', 1200, 12),
-(5, 'Teclado Mecânico RGB', 350, 20);
-
+(5, 'Teclado Mecânico RGB', 350, 20),
+(6, 'mouse, 400, 13');
 -- 2. Inserir dados na tabela de clientes
 INSERT INTO clientes (id_cliente, nome_produto, email, data_ultima_compra, status) VALUES 
 (101, 'Ana Silva', 'ana.silva@email.com', 20251210, 'Ativo'),
