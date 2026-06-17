@@ -39,6 +39,7 @@ INSERT INTO clientes (id_cliente, nome_cliente, email, data_ultima_compra, statu
 VALUES
 (1, 'Joao Silva', 'joao@gmail.com', 20260501, 'Ativo'),
 (2, 'Maria Souza', 'maria@gmail.com', 20260515, 'Ativo'),
+(2, 'Maria ', 'maria@gmail.com', 20260515, 'Ativo'),
 (3, 'Pedro Lima', 'pedro@gmail.com', 20260420, 'Inativo');
 
 INSERT INTO vendas (id_venda, id_cliente, id_produto, data_venda)
